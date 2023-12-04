@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna</title>
+</head>
+<body>
+    <form id="imageForm" enctype="multipart/form-data">
+        <input type="file" id="image" name="image">
+        <button type="button" onclick="uploadImage()">Upload Image</button>
+        <h1 id="text">Krishna</h1>
+    </form>
+
+    <script>
+        let id = "Krishn";
+        function uploadImage() {
+            // var formData = new FormData(document.getElementById('image'));
+            let inputElement = document.getElementById('image');
+            let file = inputElement.files[0];
+            let formData = new FormData();
+            formData.append('image', file);
+
+            fetch('http://192.168.0.102:8000/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("hare Krishna data is: ", data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
